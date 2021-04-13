@@ -28,7 +28,7 @@ class Bloqs_experiments_ext
     {
         $atomValue = $this->findExperimentAtomValue($block);
 
-        if (!$atomValue) {
+        if (!is_int($atomValue)) {
             return false;
         }
 
