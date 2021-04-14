@@ -27,12 +27,9 @@ class Bloqs_experiments_ext
     public function blocks_hide_block(Block $block)
     {
         $atomValue = $this->findExperimentAtomValue($block);
+        $chosen = is_numeric($atomValue) ? (int) $atomValue : null;
 
-        if (!is_int($atomValue)) {
-            return false;
-        }
-
-        if (!$this->variation->shouldShowContent($atomValue)) {
+        if (!$this->variation->shouldShowContent($chosen)) {
             return true;
         }
 
@@ -47,7 +44,7 @@ class Bloqs_experiments_ext
     {
         foreach ($block->getAtoms() as $atom) {
             if ($atom->getDefinition()->getType() === 'experiments') {
-                return (int) $atom->getValue();
+                return $atom->getValue();
             }
         }
 
